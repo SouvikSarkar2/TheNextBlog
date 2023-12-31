@@ -4,22 +4,37 @@ import PostUser from "@/components/postUser/postUser";
 import { Suspense } from "react";
 import { getPost } from "@/lib/data";
 
-// const getData = async (slug) => {
-//   const res = await fetch(
-//     `https://jsonplaceholder.typicode.com/posts/${slug}`,
-//     { cache: "no-store" }
-//   );
+export const generateMetadata = async ({ params }) => {
+  const { slug } = params;
 
-//   if (!res.ok) {
-//     throw new Error("Something went wrong");
-//   }
+  const post = await getPost(slug);
 
-//   return res.json();
-// };
+  return {
+    title: post.title,
+    description: post.desc,
+  };
+};
+
+const getData = async (slug) => {
+  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
+    cache: "no-store",
+  });
+
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+
+  return res.json();
+};
 
 const SinglePostPage = async ({ params }) => {
   const { slug } = params;
-  const post = await getPost(slug);
+
+  //WITH API
+  const post = await getData(slug);
+
+  //  WITHOUT API
+  // const post = await getPost(slug);
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
