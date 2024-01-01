@@ -29,8 +29,6 @@ const links = [
 const Links = ({ session }) => {
   const [open, setOpen] = useState(false);
 
-  const isAdmin = true;
-
   return (
     <div className={styles.container}>
       <div className={styles.links}>
@@ -64,6 +62,11 @@ const Links = ({ session }) => {
           {links.map((link) => (
             <NavLink item={link} key={link.title} />
           ))}
+          {session && (
+            <form action={handleLogout}>
+              <button className={styles.logout}>Logout</button>
+            </form>
+          )}
         </div>
       )}
     </div>

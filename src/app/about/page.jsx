@@ -26,17 +26,17 @@ const AboutPage = () => {
             <p>Year of Experience</p>
           </div>
           <div className={styles.box}>
-            <h1>10 K+</h1>
-            <p>Year of Experience</p>
+            <h1>100 K+</h1>
+            <p>Satisfied Customers</p>
           </div>
           <div className={styles.box}>
-            <h1>10 K+</h1>
-            <p>Year of Experience</p>
+            <h1>1 M+</h1>
+            <p>Posts online</p>
           </div>
         </div>
       </div>
       <div className={styles.imgContainer}>
-        <Image src="/about.png" alt="about image" className={styles.img} fill />
+        <Image src="/car.gif" alt="about image" className={styles.img} fill />
       </div>
     </div>
   );

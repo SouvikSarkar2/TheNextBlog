@@ -5,8 +5,8 @@ import { connectToDb } from "./utils";
 import { signIn, signOut } from "./auth";
 import bcrypt from "bcryptjs";
 
-export const addPost = async (formData) => {
-  const { title, desc, slug, userId } = Object.fromEntries(formData);
+export const addPost = async (previousState, formData) => {
+  const { title, desc, slug, userId, img } = Object.fromEntries(formData);
 
   try {
     connectToDb();
@@ -15,11 +15,13 @@ export const addPost = async (formData) => {
       desc,
       slug,
       userId,
+      img,
     });
 
     await newPost.save();
     console.log("saved to db");
     revalidatePath("/blog");
+    revalidatePath("/admin");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong crearing newPost" };
@@ -34,6 +36,7 @@ export const deletePost = async (formData) => {
     await Post.findByIdAndDelete(id);
     console.log("id deleted from db");
     revalidatePath("/blog");
+    revalidatePath("/admin");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong deletin a post" };
@@ -98,5 +101,46 @@ export const login = async (prevState, formData) => {
     }
     console.log(err.type);
     throw err;
+  }
+};
+
+export const addUser = async (prevState, formData) => {
+  const { username, email, password, img, isAdmin } =
+    Object.fromEntries(formData);
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
+  try {
+    connectToDb();
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+      img,
+      isAdmin,
+    });
+
+    await newUser.save();
+    console.log("saved to db");
+    revalidatePath("/blog");
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong crearing newPost" };
+  }
+};
+
+export const deleteUser = async (formData) => {
+  const { id } = Object.fromEntries(formData);
+
+  try {
+    connectToDb();
+    await Post.deleteMany({ userId: id });
+    await User.findByIdAndDelete(id);
+    console.log("id deleted from db");
+    revalidatePath("/admin");
+  } catch (err) {
+    console.log(err);
+    return { error: "Something went wrong deletin a post" };
   }
 };

@@ -1,6 +1,7 @@
 import { handleGithubLogin, login } from "@/lib/action";
 import LoginForm from "@/components/loginForm/LoginForm";
 import styles from "./login.module.css";
+import { auth } from "@/lib/auth";
 
 const LoginPage = () => {
   return (
