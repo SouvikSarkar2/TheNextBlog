@@ -3,6 +3,7 @@ import styles from "./singlePost.module.css";
 import PostUser from "@/components/postUser/postUser";
 import { Suspense } from "react";
 import { getPost } from "@/lib/data";
+import Spinner from "@/components/spinner/Spinner";
 
 export const generateMetadata = async ({ params }) => {
   const { slug } = params;
@@ -47,7 +48,7 @@ const SinglePostPage = async ({ params }) => {
         <h1 className={styles.title}>{post?.title}</h1>
         <div className={styles.detail}>
           {post && (
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<Spinner />}>
               <PostUser userId={post.userId} />
             </Suspense>
           )}
