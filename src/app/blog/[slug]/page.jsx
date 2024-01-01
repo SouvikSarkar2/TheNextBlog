@@ -16,9 +16,12 @@ export const generateMetadata = async ({ params }) => {
 };
 
 const getData = async (slug) => {
-  const res = await fetch(`http://localhost:3000/api/blog/${slug}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `https://the-next-blog-alpha.vercel.app/api/blog/${slug}`,
+    {
+      cache: "no-store",
+    }
+  );
 
   if (!res.ok) {
     throw new Error("Something went wrong");
