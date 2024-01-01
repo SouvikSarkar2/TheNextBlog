@@ -58,4 +58,8 @@
     flex-direction: column;
     gap: 50px;
   }
+
+  .title {
+    font-size: 30px;
+  }
 }

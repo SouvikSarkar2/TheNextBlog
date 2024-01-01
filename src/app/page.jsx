@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.textContainer}>
-        <h1 className={styles.title}>Quantum Quill Innovations </h1>
+        <h1 className={styles.title}>QUANTUM QUILL INNOVATIONS </h1>
         <p className={styles.desc}>
           QuantumQuill Innovations: Redefining the future of blogging with
           state-of-the-art encryption and cutting-edge AI, ensuring a private
