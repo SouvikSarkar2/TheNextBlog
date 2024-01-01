@@ -15,29 +15,29 @@ export const generateMetadata = async ({ params }) => {
   };
 };
 
-const getData = async (slug) => {
-  const res = await fetch(
-    `https://the-next-blog-alpha.vercel.app/api/blog/${slug}`,
-    {
-      cache: "no-store",
-    }
-  );
+// const getData = async (slug) => {
+//   const res = await fetch(
+//     `https://the-next-blog-alpha.vercel.app/api/blog/${slug}`,
+//     {
+//       cache: "no-store",
+//     }
+//   );
 
-  if (!res.ok) {
-    throw new Error("Something went wrong");
-  }
+//   if (!res.ok) {
+//     throw new Error("Something went wrong");
+//   }
 
-  return res.json();
-};
+//   return res.json();
+// };
 
 const SinglePostPage = async ({ params }) => {
   const { slug } = params;
 
   //WITH API
-  const post = await getData(slug);
+  /* const post = await getData(slug); */
 
   //  WITHOUT API
-  // const post = await getPost(slug);
+  const post = await getPost(slug);
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
