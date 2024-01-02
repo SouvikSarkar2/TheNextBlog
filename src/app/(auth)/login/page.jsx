@@ -6,6 +6,7 @@ import { auth } from "@/lib/auth";
 const LoginPage = () => {
   return (
     <div className={styles.container}>
+      <p className={styles.para}>Please Login to view Blogs</p>
       <div className={styles.wrapper}>
         <form action={handleGithubLogin}>
           <button className={styles.github}>Login with Github</button>
